@@ -1,0 +1,27 @@
+jobmanager.rpc.address: jobamanager
+jobmanager.rpc.port: 6123
+jobamanager.memory.process.size: 1600m
+
+#taskmanager settings
+taskmanager.memory.process.size: 1728m
+taskmanager.numberofTaskSlots: 4
+taskmanager.memory.network.fraction: 0.1
+#Parallelism
+parallelism.default: 2
+
+#checkpoint for testing
+state.backend: filesystem
+state.checkpoints.dir: file://tmp/flink-checkpoints
+state.savepoints.dir: file://tmp/flink-savepoints
+
+#webui
+web.submit.enable: true
+web.cancel.enable: true
+
+##logging
+rootLogger.level: INFO
+
+#resource allocation
+taskmanager.memory.flink.size: 1024m
+taskmanager.memory.task.heap.size: 512m
+taskmanager.memory.managed.size: 256m
