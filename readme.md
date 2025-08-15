@@ -39,6 +39,8 @@
 ### Example URLs to Try
 - `https://www.americanbar.org/directories/lawyers/`
 - `https://www.americanbar.org/groups/lawyer_referral/`
+
+- `https://apps.calbar.ca.gov/attorney/Licensee/Detail/218582`
 - Search for lawyers in your area on the ABA site
 
 ### What Gets Scraped
