@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            width: 350px;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin: 0;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        h1 {
+            text-align: center;
+            margin: 0 0 20px 0;
+            font-size: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .button {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        
+        .button:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .button:active {
+            transform: translateY(0);
+        }
+        
+        .scrape-btn {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+        }
+        
+        .scrape-btn:hover {
+            background: linear-gradient(45deg, #45a049, #4CAF50);
+        }
+        
+        .download-btn {
+            background: linear-gradient(45deg, #2196F3, #1976D2);
+            color: white;
+        }
+        
+        .download-btn:hover {
+            background: linear-gradient(45deg, #1976D2, #2196F3);
+        }
+        
+        .clear-btn {
+            background: linear-gradient(45deg, #f44336, #d32f2f);
+            color: white;
+        }
+        
+        .clear-btn:hover {
+            background: linear-gradient(45deg, #d32f2f, #f44336);
+        }
+        
+        .status {
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            text-align: center;
+            font-size: 13px;
+            min-height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .count {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+        }
+        
+        .instructions {
+            font-size: 12px;
+            opacity: 0.9;
+            text-align: center;
+            margin-top: 15px;
+            line-height: 1.4;
+        }
+        
+        .spinner {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 2px solid white;
+            width: 16px;
+            height: 16px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚖️ CalBar Lawyer Scraper</h1>
+        
+        <div class="count" id="dataCount">
+            Found: <span id="count">0</span> lawyers
+        </div>
+        
+        <button id="scrapeBtn" class="button scrape-btn">
+            🔍 Scrape Current Lawyer
+        </button>
+        
+        <button id="bulkScrapeBtn" class="button scrape-btn">
+            🚀 Bulk Scrape (Range)
+        </button>
+        
+        <div id="bulkOptions" style="display: none; margin: 15px 0;">
+            <div style="margin: 8px 0;">
+                <label style="display: block; margin-bottom: 4px; font-size: 12px;">Start ID:</label>
+                <input type="number" id="startId" placeholder="e.g., 100000" 
+                       style="width: 100%; padding: 6px; border: none; border-radius: 4px;">
+            </div>
+            <div style="margin: 8px 0;">
+                <label style="display: block; margin-bottom: 4px; font-size: 12px;">End ID:</label>
+                <input type="number" id="endId" placeholder="e.g., 100100" 
+                       style="width: 100%; padding: 6px; border: none; border-radius: 4px;">
+            </div>
+            <div style="margin: 8px 0;">
+                <label style="display: block; margin-bottom: 4px; font-size: 12px;">Delay (ms):</label>
+                <input type="number" id="delayMs" value="2000" 
+                       style="width: 100%; padding: 6px; border: none; border-radius: 4px;">
+            </div>
+            <button id="startBulkBtn" class="button scrape-btn">
+                ▶️ Start Bulk Scrape
+            </button>
+            <button id="stopBulkBtn" class="button clear-btn" style="display: none;">
+                ⏹️ Stop Scraping
+            </button>
+        </div>
+        
+        <button id="downloadBtn" class="button download-btn">
+            📥 Download CSV
+        </button>
+        
+        <button id="clearBtn" class="button clear-btn">
+            🗑️ Clear Data
+        </button>
+        
+        <div class="status" id="status">
+            Ready to scrape
+        </div>
+        
+        <div class="instructions">
+            <strong>Instructions:</strong><br>
+            1. Navigate to CalBar lawyer detail page<br>
+            2. Use "Scrape Current" for single lawyer<br>
+            3. Use "Bulk Scrape" for ID ranges<br>
+            4. Download results as CSV
+        </div>
+    </div>
+    
+    <script src="popup.js"></script>
+</body>
+</html>
